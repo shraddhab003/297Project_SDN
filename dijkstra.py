@@ -29,7 +29,8 @@ def save_graph(graph,file_name):
 
 if __name__ == '__main__':
 	from networkx.readwrite import json_graph
-
+	
+	# Adding 6 nodes (0 to 5) to the graph
 	G = nx.Graph()
 	G.add_node(0)
 	G.add_node(1)
@@ -38,6 +39,7 @@ if __name__ == '__main__':
 	G.add_node(4)
 	G.add_node(5)
 
+	#Adding edges with respective weights
 	G.add_edge(0, 1, weight=7)
 	G.add_edge(0, 2, weight=3)
 	G.add_edge(1, 3, weight=1)
@@ -46,13 +48,14 @@ if __name__ == '__main__':
 	G.add_edge(3, 5, weight=4)
 	G.add_edge(4, 5, weight=5)
 
+	# Calculating the shortest path between the nodes 1 and 5
 	try:
-    		n=nx.shortest_path(G,1,5)
+    		n = nx.shortest_path(G,1,5)
     		print n
 	except nx.NetworkXNoPath:
     		print 'No path'
 	
-
+	# creation of json object
 	data = json_graph.node_link_data(G)
 	# s = json.dumps(data)
 	# print s
