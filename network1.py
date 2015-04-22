@@ -76,7 +76,7 @@ if __name__ == '__main__':
         json.dump(data, out_file, indent=4)
 	json_info = json.loads(s)
         
-	graph = collection.update(db.graph_collection.find(),json_info,upsert = True,multi = True)
+	graph = collection.insert(json_info)
         
 	# Close the file
         out_file.close()
