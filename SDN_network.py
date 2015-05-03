@@ -162,6 +162,7 @@ if __name__ == '__main__':
 	print('*************HANDLING SCALABILITY IN SDN*************')
 	condition = "Y"
 	list_graphs = []
+	check_err = 0
 	path = []
 	client = mongodb_client()
 	while condition == "Y":
@@ -260,7 +261,7 @@ if __name__ == '__main__':
 						create_figure(G1,subnw_no_edit,path)
 					else:
 						print 'The node to be attached to new node not found in the sub-network'
-
+						check_err = 1
 				elif subnw_no_edit == 2:
 					# G2 = K.copy()
 					G2 = json_graph.node_link_graph(data_graph, multigraph = False)
@@ -285,6 +286,7 @@ if __name__ == '__main__':
                      				create_figure(G2,subnw_no_edit,path)	
 					else:
 						print 'The node to be attached to new node not found in the sub-network'
+						check_err = 1
 				else:
 					#G3 = K.copy()
 					G3 = json_graph.node_link_graph(data_graph, multigraph = False)
@@ -309,26 +311,31 @@ if __name__ == '__main__':
                                         	create_figure(G3,subnw_no_edit,path)
 					else:
 						print 'The node to be attached to new node not found in the sub-network'
-			else:
+						check_err = 1
+			else:			
 				print 'Graph' + subnw_no_edit + ' not found'
+				check_err = 1
 			
 		else:
 			print 'Wrong option selected.'	
+			check_err = 1
 			break
-	
-		I = nx.compose(G1,G2)
-		J = nx.compose(I,G3)
-		generate_json(J,4)
-		# create_figure(J,4)
-		# print G1.nodes()
-		# print G2.nodes()
-		# print G3.nodes()
-		print 'The nodes for entire network are : ' + str(J.nodes())
-		#path = nx.shortest_path(J, u'a1', u'c0')
-		#print path
-		path = shortestpath(J)
-		create_figure(J,4,path)
-		print 'The shortest path is : ' + str(path)
-		condition = raw_input ('Do you want to continue?[Y/n] ')
-	client.close()
+		
+		if check_err == 0 :	
+			I = nx.compose(G1,G2)
+			J = nx.compose(I,G3)
+			generate_json(J,4)
+			# create_figure(J,4)
+			# print G1.nodes()
+			# print G2.nodes()
+			# print G3.nodes()
+			print 'The nodes for entire network are : ' + str(J.nodes())
+			#path = nx.shortest_path(J, u'a1', u'c0')
+			#print path
+			path = shortestpath(J)
+			create_figure(J,4,path)
+			print 'The shortest path is : ' + str(path)
+		else :
+			condition = raw_input ('Do you want to continue?[Y/n] ')
+			client.close()
 	print 'Thank you!' 

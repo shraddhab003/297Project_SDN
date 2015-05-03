@@ -1,0 +1,50 @@
+{
+    "directed": false, 
+    "network": 1, 
+    "links": [
+        {
+            "source": 0, 
+            "target": 2
+        }, 
+        {
+            "source": 0, 
+            "target": 3
+        }, 
+        {
+            "source": 1, 
+            "target": 3
+        }, 
+        {
+            "source": 2, 
+            "target": 3
+        }, 
+        {
+            "source": 3, 
+            "target": 4
+        }
+    ], 
+    "multigraph": false, 
+    "graph": [
+        [
+            "name", 
+            "barabasi_albert_graph(4,2)"
+        ]
+    ], 
+    "nodes": [
+        {
+            "id": "a1"
+        }, 
+        {
+            "id": "a0"
+        }, 
+        {
+            "id": "a3"
+        }, 
+        {
+            "id": "a2"
+        }, 
+        {
+            "id": "router"
+        }
+    ]
+}
